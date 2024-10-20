@@ -12,8 +12,6 @@ function App() {
   const [turn, setTurn] = useState(TURNS.X);
   const [winner, setWinner] = useState(null); //null = no ha terminado el juego, false = empate
 
-  
-
   const resetGame = () => {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
@@ -23,13 +21,16 @@ function App() {
   const updateBoard = (index) => {
     //chequea si la casilla esta ocupada
     if (board[index] || winner) return;
+
     //actualiza el tablero
     const newBoard = [...board];
     newBoard[index] = turn;
     setBoard(newBoard);
+
     //cambia el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
     setTurn(newTurn);
+    
     //chequea si hay ganador
     const newWinner = checkWinner(newBoard);
     if (newWinner){
